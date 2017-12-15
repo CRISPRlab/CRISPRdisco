@@ -1,0 +1,51 @@
+version: '2'
+
+services:
+  crisprdisco_notebook:
+    image: crisprlab/crisprdisco_notebook
+    container_name: "${NAME}"
+    ports:
+      - "${PORT}:${PORT}"
+    command: "start-notebook.sh --port ${PORT} --NotebookApp.base_url=crisprdisco_notebook"
+    tty: true
+    volumes:
+      - "/var/run/docker.sock:/var/run/docker.sock"
+      - ".:/home/jovyan/work"
+    user: "root"
+    environment:
+      GRANT_SUDO: "yes"
+      NB_UID: "${NB_UID}"
+      DASHBOARD_SERVER_URL: http://crisprdisco_dashboard:$DB_PORT/
+      DASHBOARD_REDIRECT_URL: "http://${HOST}:$DB_PORT/"
+      DASHBOARD_SERVER_AUTH_TOKEN: this_is_a_token
+
+  crisprdisco_kernel:
+    image: crisprlab/crisprdisco_kernel_gateway
+    user: "root"
+    environment:
+      NB_UID: "${NB_UID}"
+      KG_ALLOW_ORIGIN: "*"
+    restart: always
+    volumes_from:
+      - crisprdisco_notebook
+
+  crisprdisco_dashboard:
+    image: crisprlab/dashboard_server
+    ports:
+      - "$DB_PORT:$DB_PORT"
+    depends_on:
+      - crisprdisco_kernel
+    links:
+      - crisprdisco_kernel
+    environment:
+      DB_UID: "${NB_UID}"
+      PORT: $DB_PORT
+      KERNEL_GATEWAY_URL: http://crisprdisco_kernel:8888
+      AUTH_TOKEN: this_is_a_token
+      PUBLIC_LINK_PATTERN: "http://${HOST}:${DB_PORT}"
+    restart: always
+    user: root
+    volumes:
+      - "./app:/srv/app"
+    volumes_from:
+      - crisprdisco_notebook

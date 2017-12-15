@@ -1,0 +1,24 @@
+FROM crisprlab/base:latest
+#FROM jupyter/datascience-notebook
+
+USER root
+
+RUN conda install -y -c bioconda -c biocore \
+    blast minced hmmer
+
+RUN mkdir /opt/app
+COPY . /opt/app
+RUN chown -R $NB_USER /opt/app
+#RUN fix-permissions /opt/app
+
+USER $NB_USER
+
+RUN conda install -y -n python2 biopython
+#RUN conda create -y -n python2 python=2.7 biopython
+
+#need bash for conda
+SHELL ["/bin/bash", "-c"]
+
+RUN source activate python2 && pip install --upgrade pip && cd /opt/app && pip install -e .
+
+#RUN fix-permissions /opt/
