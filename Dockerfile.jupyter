@@ -1,5 +1,5 @@
-FROM crisprlab/base:latest
-#FROM jupyter/datascience-notebook
+#FROM crisprlab/base:latest
+FROM jupyter/datascience-notebook
 
 USER root
 

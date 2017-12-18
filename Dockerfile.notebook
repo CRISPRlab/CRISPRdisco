@@ -1,19 +1,10 @@
-FROM crisprlab/base:latest
-#FROM jupyter/datascience-notebook
+#FROM crisprlab/base:latest
+FROM jupyter/datascience-notebook
 
 USER root
 
 RUN conda install -y -c bioconda -c biocore \
     blast minced hmmer nb_conda
-
-#RUN addgroup -gid 562040379 share_current \
-#    && usermod -aG share_current $NB_USER
-#RUN addgroup -gid 562043343 share_databases \
-#    && usermod -aG share_databases $NB_USER
-#RUN addgroup -gid 562040385 share_transfer_prod \
-#    && usermod -aG share_transfer_prod $NB_USER
-#RUN addgroup -gid 562040356 bioinfoteam \
-#    && usermod -aG bioinfoteam $NB_USER
 
 RUN mkdir /opt/app
 COPY . /opt/app
