@@ -1,7 +1,7 @@
 from setuptools import setup
 
 setup(
-    name='CRISPRdisco',
+    name='crisprdisco',
     version='development',
     py_modules=[
     ],
