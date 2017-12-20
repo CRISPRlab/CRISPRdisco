@@ -209,6 +209,8 @@ def domainSearch(HMM_location, SEQ_location, working_outdir=os.getcwd(),dry_run=
 
 def csvFileInput(path_to_file):
     '''Can use a csv file with column named 'Path' for input list of files. '''
+    #print os.getcwd()
+    #print os.listdir(os.getcwd())
     df_single_AIMs = pd.read_csv(path_to_file)
     df_single_AIMs_Paths = df_single_AIMs[['Path']]
     filtered_file_locations = df_single_AIMs_Paths.dropna()

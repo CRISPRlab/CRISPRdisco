@@ -1,0 +1,16 @@
+##gff-version 3
+gi|564287833|ref|NC_023011.1|	minced:0.2.0	CRISPR	98414	99292	14	.	.	ID=CRISPR1
+gi|564287833|ref|NC_023011.1|	minced:0.2.0	repeat_unit	98414	98443	1	.	.	Parent=CRISPR1;ID=DR1
+gi|564287833|ref|NC_023011.1|	minced:0.2.0	repeat_unit	98481	98510	1	.	.	Parent=CRISPR1;ID=DR2
+gi|564287833|ref|NC_023011.1|	minced:0.2.0	repeat_unit	98547	98576	1	.	.	Parent=CRISPR1;ID=DR3
+gi|564287833|ref|NC_023011.1|	minced:0.2.0	repeat_unit	98613	98642	1	.	.	Parent=CRISPR1;ID=DR4
+gi|564287833|ref|NC_023011.1|	minced:0.2.0	repeat_unit	98679	98708	1	.	.	Parent=CRISPR1;ID=DR5
+gi|564287833|ref|NC_023011.1|	minced:0.2.0	repeat_unit	98745	98774	1	.	.	Parent=CRISPR1;ID=DR6
+gi|564287833|ref|NC_023011.1|	minced:0.2.0	repeat_unit	98810	98839	1	.	.	Parent=CRISPR1;ID=DR7
+gi|564287833|ref|NC_023011.1|	minced:0.2.0	repeat_unit	98875	98904	1	.	.	Parent=CRISPR1;ID=DR8
+gi|564287833|ref|NC_023011.1|	minced:0.2.0	repeat_unit	98940	98969	1	.	.	Parent=CRISPR1;ID=DR9
+gi|564287833|ref|NC_023011.1|	minced:0.2.0	repeat_unit	99005	99034	1	.	.	Parent=CRISPR1;ID=DR10
+gi|564287833|ref|NC_023011.1|	minced:0.2.0	repeat_unit	99068	99097	1	.	.	Parent=CRISPR1;ID=DR11
+gi|564287833|ref|NC_023011.1|	minced:0.2.0	repeat_unit	99132	99161	1	.	.	Parent=CRISPR1;ID=DR12
+gi|564287833|ref|NC_023011.1|	minced:0.2.0	repeat_unit	99196	99225	1	.	.	Parent=CRISPR1;ID=DR13
+gi|564287833|ref|NC_023011.1|	minced:0.2.0	repeat_unit	99263	99292	1	.	.	Parent=CRISPR1;ID=DR14

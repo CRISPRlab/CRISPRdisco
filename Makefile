@@ -4,30 +4,29 @@ SHELL:=bash
 GIT_MASTER_HEAD_SHA:=$(shell git rev-parse --short=12 --verify HEAD)
 
 init:
-	docker pull agbiome/base-datascience
-	docker pull agbiome/base
-	docker build --rm -f Dockerfile -t agbiome/crawler .
-	docker build --rm -f Dockerfile.jupyter -t agbiome/crawler_jupyter .
-	docker build --rm -f Dockerfile.notebook -t agbiome/crawler_notebook .
-	docker build --rm -f Dockerfile.kernel_gateway -t agbiome/crawler_kernel_gateway .
+	docker pull continuumio/miniconda
+	docker build --rm -f Dockerfile -t crisprlab/crisprdisco .
+	docker build --rm -f Dockerfile.jupyter -t crisprlab/crisprdisco_jupyter .
+	docker build --rm -f Dockerfile.notebook -t crisprlab/crisprdisco_notebook .
+	docker build --rm -f Dockerfile.kernel_gateway -t crisprlab/crisprdisco_kernel_gateway .
 
 rebuild:
-	docker build --rm --no-cache -f Dockerfile -t agbiome/crawler .
-	docker build --rm --no-cache -f Dockerfile.jupyter -t agbiome/crawler_jupyter .
-	docker build --rm --no-cache -f Dockerfile.notebook -t agbiome/crawler_notebook .
-	docker build --rm --no-cache -f Dockerfile.kernel_gateway -t agbiome/crawler_kernel_gateway .
+	docker build --rm --no-cache -f Dockerfile -t crisprlab/crisprdisco .
+	docker build --rm --no-cache -f Dockerfile.jupyter -t crisprlab/crisprdisco_jupyter .
+	docker build --rm --no-cache -f Dockerfile.notebook -t crisprlab/crisprdisco_notebook .
+	docker build --rm --no-cache -f Dockerfile.kernel_gateway -t crisprlab/crisprdisco_kernel_gateway .
 
 tag:
-	docker tag agbiome/crawler:latest agbiome/crawler:$(GIT_MASTER_HEAD_SHA)
-	docker tag agbiome/crawler_jupyter:latest agbiome/crawler_jupyter:$(GIT_MASTER_HEAD_SHA)
-	docker tag agbiome/crawler_notebook:latest agbiome/crawler_notebook:$(GIT_MASTER_HEAD_SHA)
-	docker tag agbiome/crawler_kernel_gateway:latest agbiome/crawler_kernel_gateway:$(GIT_MASTER_HEAD_SHA)
+	docker tag crisprlab/crisprdisco:latest crisprlab/crisprdisco:$(GIT_MASTER_HEAD_SHA)
+	docker tag crisprlab/crisprdisco_jupyter:latest crisprlab/crisprdisco_jupyter:$(GIT_MASTER_HEAD_SHA)
+	docker tag crisprlab/crisprdisco_notebook:latest crisprlab/crisprdisco_notebook:$(GIT_MASTER_HEAD_SHA)
+	docker tag crisprlab/crisprdisco_kernel_gateway:latest crisprlab/crisprdisco_kernel_gateway:$(GIT_MASTER_HEAD_SHA)
 
 release:
-	docker push agbiome/crawler
-	docker push agbiome/crawler_jupyter
-	docker push agbiome/crawler_notebook
-	docker push agbiome/crawler_kernel_gateway
+	docker push crisprlab/crisprdisco
+	docker push crisprlab/crisprdisco_jupyter
+	docker push crisprlab/crisprdisco_notebook
+	docker push crisprlab/crisprdisco_kernel_gateway
 
 deploy: 
 	./deploy.sh
@@ -38,10 +37,10 @@ check_docker_login:
 
 git_init:
 	@curl --user ${GITHUB_TOKEN}:x-oauth-basic --request POST \
-		--data '{"name":"crawler","private":true,"gitignore_template":"Python"}' \
-		https://api.github.com/orgs/agbiome/repos && \
+		--data '{"name":"crisprdisco","private":true,"gitignore_template":"Python"}' \
+		https://api.github.com/orgs/crisprlab/repos && \
 	git init && \
-	git remote add origin git@github.com:AgBiome/crawler.git && \
+	git remote add origin git@github.com:crisprlab/crisprdisco.git && \
 	git remote -v && \
 	git pull origin master && \
 	git add . && \

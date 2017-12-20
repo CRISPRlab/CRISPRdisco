@@ -1,0 +1,6 @@
+,query id,subject id,% identity,alignment length,mismatches,gap opens,q. start,q. end,s. start,s. end,evalue,bit score,% query coverage per subject,% query coverage per hsp,subject tax ids
+830,"gi|55822628|ref|YP_141069.1|CAS-II-A,CAS-II-B,CAS-II-C|cas1|cas1",NC_006449_141069.1|,100.0,303,0,0,1,303,1,303,0.0,630.0,100,100,
+831,"gi|55822913|ref|YP_141354.1|CAS-I,CAS-II,CAS-III,CAS-V|cas1|cas1",NC_006449_141354.1|,100.0,207,0,0,1,207,1,207,3.71e-155,424.0,100,100,
+832,"gi|55822914|ref|YP_141355.1|CAS-I,CAS-II,CAS-III,CAS-V|cas1|cas1",NC_006449_141355.1|,100.0,131,0,0,1,131,1,131,2.52e-96,269.0,100,100,
+267,gi|344209644|ref|YP_004785821.1|CAS-I-B|cas1|cas1,NC_023011_008874111.1|,100.0,331,0,0,1,331,1,331,0.0,691.0,100,100,
+401,"gi|340624264|ref|YP_004742717.1|CAS-I,CAS-II,CAS-III,CAS-V|cas1|cas1",NC_015847_004742717.1|,100.0,342,0,0,1,342,1,342,0.0,700.0,100,100,

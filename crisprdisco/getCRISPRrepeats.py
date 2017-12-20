@@ -25,7 +25,7 @@ def globFilesTOFrame(workingdir, file_locations):
         genome = os.path.basename(row['Path'])
         minced_location = os.path.join(workingdir,genome)
         file_locations_frame.loc[index, 'genome']= genome
-        file_locations_frame.loc[index, 'minced location'] = minced_location+'.crispr'
+        file_locations_frame.loc[index, 'minced location'] = minced_location+'.fna.crispr'
     #print files_frame
     return file_locations_frame
 
@@ -114,6 +114,7 @@ def filterMINCEDwrapper(input_frame, output_dir, today):
     for index, row in input_frame.iterrows():
         minced_location = input_frame.loc[index, 'minced location']
         local_location = input_frame.loc[index, 'Path']
+	#print minced_location
         loaded_gff = pd.read_csv(minced_location, sep = "\t", comment = "#", names = colheaders, index_col=False)
         #print len(loaded_gff)
         if len(loaded_gff) > 0:
