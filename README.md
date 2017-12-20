@@ -46,7 +46,10 @@ To run the program, minimum input is:
 ```
 disco input.csv
 ```
- 
+Or:
+```
+./disco.sh input.csv
+``` 
  
 where input.csv looks like:
 ```
