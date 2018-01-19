@@ -13,7 +13,7 @@ RUN chown -R $NB_USER /opt/app
 USER $NB_USER
 
 #RUN conda install -y biopython
-#RUN conda create -y -n python2 
+RUN conda create -y -n python2 
 
 #need bash for conda
 SHELL ["/bin/bash", "-c"]
