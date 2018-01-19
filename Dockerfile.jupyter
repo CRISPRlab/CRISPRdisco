@@ -3,7 +3,7 @@ FROM jupyter/datascience-notebook
 
 USER root
 
-RUN conda install -y -c bioconda -c biocore python=2.7 biopython blast minced hmmer
+RUN conda install -y -c bioconda -c biocore biopython blast minced hmmer
 
 RUN mkdir /opt/app
 COPY . /opt/app
