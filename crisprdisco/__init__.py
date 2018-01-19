@@ -3,6 +3,6 @@ import casPROTidentification
 import generateMasterTbl
 import getCRISPRrepeats
 
-from CRISPRdisco.cli import script
+from crisprdisco.cli import script
 
 __version__=cli.script.__version__
