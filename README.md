@@ -128,7 +128,7 @@ Use on of the following, from most to least reccomaneded
 
 0) On a Ubuntu or debian OS with make, git, and docker installed (either use your package manager and see https://www.docker.com/get-docker):
 
-1) Get code: `git clone git@github.com:crisprlab/crisprdisco.git; cd CRISPRdisco`
+1) Get code: `git clone https://github.com/CRISPRlab/CRISPRdisco.git; cd CRISPRdisco`
 
 2) Run CLI: `./disco.sh`
 
@@ -138,7 +138,7 @@ Use on of the following, from most to least reccomaneded
 
 0) On a Ubuntu or debian OS with make, git, and docker installed (either use your package manager and see https://www.docker.com/get-docker):
 
-1) Get code: `git clone git@github.com:crisprlab/crisprdisco.git; cd CRISPRdisco`
+1) Get code: `git clone https://github.com/CRISPRlab/CRISPRdisco.git; cd CRISPRdisco`
 
 
 2) Make docker images `make init`
@@ -154,7 +154,7 @@ Use on of the following, from most to least reccomaneded
     `sudo apt-get update && sudo apt-get install -y make wget bzip2 git
     wget -qO- https://get.docker.com/ | sudo sh && sudo usermod -aG docker $USER`
 
-1) Get code: `git clone git@github.com:crisprlab/crisprdisco.git; cd CRISPRdisco`
+1) Get code: `git clone https://github.com/CRISPRlab/CRISPRdisco.git; cd CRISPRdisco`
 
 2) install binary prequisites (via miniconda, or install each manually)
 
@@ -197,9 +197,9 @@ to run dockerised CRISPRdisco or dockerised jupyter notebooks
 
 dirs:
 
-    CRISPRdisco/			python library
+    CRISPRdisco/		python library
     notebooks/			jupyter lab notebooks
-    data/               reference sets
+    data/           reference sets
 
 
 docker and install management files
