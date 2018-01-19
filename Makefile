@@ -7,14 +7,10 @@ init:
 	docker pull continuumio/miniconda
 	docker build --rm -f Dockerfile -t crisprlab/crisprdisco .
 	docker build --rm -f Dockerfile.jupyter -t crisprlab/crisprdisco_jupyter .
-	docker build --rm -f Dockerfile.notebook -t crisprlab/crisprdisco_notebook .
-	docker build --rm -f Dockerfile.kernel_gateway -t crisprlab/crisprdisco_kernel_gateway .
 
 rebuild:
 	docker build --rm --no-cache -f Dockerfile -t crisprlab/crisprdisco .
 	docker build --rm --no-cache -f Dockerfile.jupyter -t crisprlab/crisprdisco_jupyter .
-	docker build --rm --no-cache -f Dockerfile.notebook -t crisprlab/crisprdisco_notebook .
-	docker build --rm --no-cache -f Dockerfile.kernel_gateway -t crisprlab/crisprdisco_kernel_gateway .
 
 tag:
 	docker tag crisprlab/crisprdisco:latest crisprlab/crisprdisco:$(GIT_MASTER_HEAD_SHA)
