@@ -126,15 +126,11 @@ Use on of the following, from most to least reccomaneded
 
 ## To use docker containers:
 
-0) On a Ubuntu or debian OS with make, git, and docker installed (either use your package manager and see https://www.docker.com/get-docker), or:
-
-    sudo apt-get update && sudo apt-get install -y make wget bzip2 git
-    wget -qO- https://get.docker.com/ | sudo sh && sudo usermod -aG docker $USER
-
+0) On a Ubuntu or debian OS with make, git, and docker installed (either use your package manager and see https://www.docker.com/get-docker):
 
 1) Get code: `git clone git@github.com:crisprlab/crisprdisco.git; cd CRISPRdisco`
 
-2) Use prebuilt containers to run CLI: `./disco.sh` or start Jupyter notebook: `./run_jupyter.sh`
+2) Run CLI: `./disco.sh`
 
 
 ## To (re)make your own docker images:
@@ -149,38 +145,38 @@ Use on of the following, from most to least reccomaneded
 1) Get code: `git clone git@github.com:crisprlab/crisprdisco.git; cd CRISPRdisco`
 
 
-2) Make docker images ``./make init`
+2) Make docker images `./make init`
 
 
 3) Run CLI: `./disco.sh` or start Jupyter notebook: `./run_jupyter.sh`, see those scripts for docker run entrypoints
 
 4) (optional) install docker compose and use dockerised jupyter dashboard server:
 
-    sudo bash -c "curl -L https://github.com/docker/compose/releases/download/1.15.0/docker-compose-`uname -s`-`uname -m` > /usr/local/bin/docker-compose"
+    `sudo bash -c "curl -L https://github.com/docker/compose/releases/download/1.15.0/docker-compose-uname -s - uname -m  > /usr/local/bin/docker-compose"`
 
-    sudo chmod +x /usr/local/bin/docker-compose
+    `sudo chmod +x /usr/local/bin/docker-compose`
 
-    ./run_dashboard.sh
+    `./run_dashboard.sh`
 
 
 ## To install by hand:
 
 0) On a Ubuntu or debian OS with make, git, and docker installed (either use your package manager and see https://www.docker.com/get-docker), or:
 
-    sudo apt-get update && sudo apt-get install -y make wget bzip2 git
-    wget -qO- https://get.docker.com/ | sudo sh && sudo usermod -aG docker $USER
+    `sudo apt-get update && sudo apt-get install -y make wget bzip2 git
+    wget -qO- https://get.docker.com/ | sudo sh && sudo usermod -aG docker $USER`
 
 1) Get code: `git clone git@github.com:crisprlab/crisprdisco.git; cd CRISPRdisco`
 
 2) install binary prequisites (via miniconda, or install each manually)
 
-    sudo apt-get update --fix-missing && sudo apt-get install -y build-essential 
+    `sudo apt-get update --fix-missing && sudo apt-get install -y build-essential `
 
-    wget --quiet https://repo.continuum.io/miniconda/Miniconda2-latest-Linux-x86_64.sh
-    /bin/bash Miniconda2-latest-Linux-x86_64.sh -b -f
+    `wget --quiet https://repo.continuum.io/miniconda/Miniconda2-latest-Linux-x86_64.sh
+    /bin/bash Miniconda2-latest-Linux-x86_64.sh -b -f`
 
-    conda install -y -c bioconda -c biocore python=2.7 blast minced hmmer pip
-    pip install --upgrade pip
+    `conda install -y -c bioconda -c biocore python=2.7 blast minced hmmer pip
+    pip install --upgrade pip`
 
     # optional, not needed if you only need CRISPRdisco to run on your system directly
     #wget -qO- https://get.docker.com/ | sudo sh && sudo usermod -aG docker $USER
