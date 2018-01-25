@@ -1,9 +1,10 @@
 #FROM crisprlab/base:latest
-FROM jupyter/datascience-notebook
+FROM jupyter/datascience-notebook:387f29b6ca83
 
 USER root
 
-RUN conda install -y -c bioconda -c biocore biopython blast minced hmmer
+
+RUN conda install -y -c bioconda -c biocore biopython=1.70 blast=2.6.0 minced=0.2.0 hmmer=3.1b2
 
 RUN mkdir /opt/app
 COPY . /opt/app

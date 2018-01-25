@@ -1,4 +1,23 @@
 #!/usr/bin/python
+"""
+CRISPRdisco: CRISPR discovery pipeline
+Copyright (C) 2017 AgBiome, Inc., All rights reserved
+
+This program is free software; you can redistribute it and/or modify
+it under the terms of the GNU General Public License as published by
+the Free Software Foundation; either version 2 of the License, or
+(at your option) any later version.
+
+This program is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+GNU General Public License for more details.
+
+You should have received a copy of the GNU General Public License along
+with this program; if not, write to the Free Software Foundation, Inc.,
+51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
+"""
+
 
 __version__ = '0.1'
 
@@ -6,8 +25,14 @@ description = """
 CRISPRdisco, version %s
 (C) AgBiome, Inc., All rights reserved
 Alexandra Crawley, 2017
+
 Identify CRISPR-Cas systems in bacteria and archaeal genomes.
+
+This is free software and comes with ABSOLUTELY NO WARRANTY. You are welcome 
+to redistribute it under certain conditions; for details see LISENCE.txt
 """ % __version__
+
+
 
 if __name__ == "__main__": print(description)
 
