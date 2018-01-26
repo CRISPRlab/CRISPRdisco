@@ -1,0 +1,8 @@
+.ipynb_checkpoints/
+*.egg-info
+*.eggs
+*.py[cod]
+**__pycache__/
+.cache
+
+test/temp_test_output
