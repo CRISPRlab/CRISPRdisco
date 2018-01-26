@@ -1,2 +1,0 @@
-,query id,subject id,% identity,alignment length,mismatches,gap opens,q. start,q. end,s. start,s. end,evalue,bit score,% query coverage per subject,% query coverage per hsp,subject tax ids
-33,gi|55822919|ref|YP_141360.1|CAS-III-A|csm6|CARF,NC_006449_141360.1|,100.0,399,0,0,1,399,1,399,0.0,798.0,100,100,
