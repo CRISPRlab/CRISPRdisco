@@ -4,7 +4,7 @@ FROM jupyter/datascience-notebook:387f29b6ca83
 USER root
 
 
-RUN conda install -y -c bioconda -c biocore biopython=1.70 blast=2.6.0 minced=0.2.0 hmmer=3.1b2
+RUN conda install -y -c bioconda -c biocore biopython=1.70 blast=2.6.0 minced=0.2.0 hmmer=3.1b2 pip=8.1.2 conda=4.1.11
 
 RUN mkdir /opt/app
 COPY . /opt/app
