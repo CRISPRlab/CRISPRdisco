@@ -6,3 +6,4 @@
 .cache
 
 test/temp_test_output
+test/test_output/*.*
