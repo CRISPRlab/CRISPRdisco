@@ -14,11 +14,8 @@ setup(
     install_requires=[
         'pandas==0.19.1',
         'numpy==1.12.1',
-        'matplotlib==1.4.2',
-        'seaborn==0.7.1',
         'biopython==1.70',
-        'click==6.7',
-        'regex==2018.1.10'
+        'click==6.7'
     ],
     entry_points='''
         [console_scripts]
