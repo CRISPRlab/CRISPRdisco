@@ -16,6 +16,7 @@ docker run \
     --rm \
     -v "/mnt":"/mnt" \
     -v "$PWD":"$PWD" \
+    -v "$PWD":/home/crisprlab
     -w "$PWD" \
     -p $PORT:$PORT \
     -e "NB_UID=$UID" \
