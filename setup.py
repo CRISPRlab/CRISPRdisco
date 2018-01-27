@@ -12,8 +12,8 @@ setup(
         "pytest==3.0.4",
     ],
     install_requires=[
-        'pandas==0.19.1',
-        'numpy==1.12.1',
+        'pandas==0.22.0',
+        'numpy==1.14.0',
         'biopython==1.70',
         'click==6.7'
     ],
