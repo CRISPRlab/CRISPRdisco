@@ -11,11 +11,14 @@ ENV PATH $CONDA_DIR/bin:$PATH
 
 
 #binary requirements
-RUN apt-get update --fix-missing && apt-get install -y build-essential=11.7 
+RUN apt-get update --fix-missing && apt-get install -y build-essential=11.7
 
-RUN useradd -ms /bin/bash -N -u $CL_UID $CL_USER && \
-    mkdir -p $CONDA_DIR && \
-    chown $CL_USER $CONDA_DIR
+RUN useradd -ms /bin/bash -N -u $CL_UID $CL_USER
+RUN    mkdir -p $CONDA_DIR && \
+    chown -R $CL_USER $CONDA_DIR
+RUN mkdir -p /opt/app
+COPY . /opt/app
+RUN chown -R $CL_USER /opt/app
 
 USER $CL_USER
 WORKDIR /home/crisprlab
@@ -23,10 +26,6 @@ WORKDIR /home/crisprlab
 RUN conda install -y -c bioconda "python=2.7*" "blast=2.6.0" "minced=0.2.0" "hmmer=3.1b2"
 
 #python requirements handled in setup.py
-RUN mkdir /opt/app
-COPY . /opt/app
 RUN cd /opt/app && pip install --disable-pip-version-check -e .
 
-ENTRYPOINT ["/usr/local/bin/tini", "--", "start.sh"]
-
-
+ENTRYPOINT ["/usr/bin/tini", "--", "start.sh"]
