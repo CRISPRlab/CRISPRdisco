@@ -4,12 +4,17 @@ README file
 
 CRISPRdisco (CRISPR discovery) will identify CRISPR repeat-spacer arrays and *cas* genes in genome data sets.  The input requirements are a csv file with a column called 'Path' that is the full path to the location of your genomes of interest. If the genomes are located in the same directory as the input csv, the path is not required and you can simply use the basename of the files.
 
+Please see paper:
+
+
+
+## Program operation
 
 ```
 Usage: disco [OPTIONS] INFILE
 
   INFILE is a csv file with a column called "Path" that has the full path to
-  the genomes of interest.  Do not include file extensions in this column.
+  the genomes of #interest.  Do not include file extensions in this column.
 
 Options:
   --workingdir TEXT       Path to working directory. Default = .
@@ -17,13 +22,18 @@ Options:
   --refset [full|typing]  full or subset for typing. Default = full
   --date TEXT             Date of analysis in YYYY-MM-DD format. Default is
                           today.
-  --tax [no|yes|AgB]      If "yes", will merge taxonomic information. Include
+  --tax [no|yes]          If "yes", will merge taxonomic information. Include
                           columns titled "organism", "Taxonomic ID Kingdom",
                           "Taxonomic ID Phylum", "Taxonomic ID Class",
                           "Taxonomic ID Order", "Taxonomic ID Family",
                           "Taxonomic ID Genus". "organism" should match the
                           name of the file.
   --cas [T|F]             Perform BLAST search. Default is True
+  --evalue TEXT           BLAST evalue. Default is 1e-6.
+  --idcutoff INTEGER      Minimum % identity to reference protein to be
+                          considered a positive hit. Default is 40%.
+  --lengthcutoff INTEGER  Minimum % coverage of reference protein to be
+                          considered a positive hit. Default is 50%.
   --repeats [T|F]         Perform CRISPR repeat search. Default is True
   --summary [T|F]         Generate master summary table with type analysis.
                           Default is True.
@@ -31,37 +41,34 @@ Options:
   --prot TEXT             Provide the protein to search for.
   --domains TEXT          Provide the location of an HMM domain database that
                           is already compiled
+  --temp [delete|keep]    Temporary files automatically deleted. Change to
+                          --temp keep to retain temporary files
   --help                  Show this message and exit.
 ```
  
  
  
-To run the program in a docker container:
+To run the program in a docker container (recommended):
  
  1. Replace `disco` in the examples below with `./disco.sh`
- 1. run from the base directory and only give relative or full paths, or preface `/home/crisprlab/` to the local path (so `./input.csv` becomes `/home/crisprlab/input.csv`), as this is where the local directory is mounted inside the container.  
+ 1. run from the base directory and give paths below below that location (relative or full).  
 
- 
+
 To run the program, minimum input is:
 ```
 disco input.csv
 ```
-Or:
-```
-./disco.sh input.csv
-``` 
  
 where input.csv looks like:
 ```
 ,Path
 0,genome
 ```
-In your working directory, there should be two files: genome.fna and genome.faa.
- 
+For this example, in your working directory there should be two files: genome.fna and genome.faa.
+
 genome.fna is a nucleotide fasta file of all of the contigs. genome.faa is the translated protein sequences from your genome in fasta format.
  
-No periods can be used in the names of the sequence files! This will ruin everything!
- 
+No periods are allowed in the names of the sequence files, only seperating the final extension! 
 
 ## Fancy additions to CRISPRdisco:
 Add taxonomic information to master table: 
@@ -79,21 +86,18 @@ disco --refset typing infile.csv
 ```
  
  
-Once CRISPRdisco has identified all the cas proteins, you can perform some further analyses on them if you have databases on hand. To do these you MUST include location of database and explicitly tell the program which cas protein to search. Additionally, you must turn of the cas gene search, the repeat search, and the summary table generation. Those are done with the following flags:
+Once CRISPRdisco has identified all the cas proteins, you can perform some further analyses on them if you have databases on hand. To do these you MUST include location of database and explicitly tell the program which cas protein to search. Additionally, you must turn off the cas gene search, the repeat search, and the summary table generation. Those are done with the following flags:
 ```
 --cas F
 --repeats F
 --summary F
 ```
- 
- 
- 
+
  
 You can search for your proteins in databases to see how distant they may be to known sequences. To search for found proteins in database use this code: 
 ```
 disco --cas F --repeats F --summary F --dbsearch /dir/DB --prot cas# infile.csv
 ```
- 
  
  
  
@@ -116,12 +120,16 @@ respectively.
 
 
 
+Lastly, a docker container with Jupyter Notebooks and the crisprdsco python library installed are available for optional visualization and analysis.
+
+1) Launch docker container serving out Jupyter Notebooks from the base directory: ./run_jupyter.sh
+
+2) Go to the displayed webpage and look at file in the `notebooks/` directory
 
 
 # Installation
 
-Use on of the following, from most to least reccomaneded
-
+Use one of the following, from most to least recommended for both the CLI and the Jupyter Notebooks
 
 
 ## To use docker containers:
@@ -130,22 +138,18 @@ Use on of the following, from most to least reccomaneded
 
 1) Get code: `git clone https://github.com/CRISPRlab/CRISPRdisco.git; cd CRISPRdisco`
 
-2) Run CLI: `./disco.sh`
+2) Run CLI: `./disco.sh --help`
 
 
 ## To make your own docker image if the above code did not run properly:
 
-
-0) On a Ubuntu or debian OS with make, git, and docker installed (either use your package manager and see https://www.docker.com/get-docker):
+0) On a Ubuntu or debian OS with make, git, and docker installed (use your package manager and see https://www.docker.com/get-docker):
 
 1) Get code: `git clone https://github.com/CRISPRlab/CRISPRdisco.git; cd CRISPRdisco`
 
-
 2) Make docker images `make init`
 
-
-3) Run CLI: `./disco.sh`
-
+3) Run CLI: `./disco.sh --help`
 
 ## To install by hand:
 
@@ -178,14 +182,12 @@ Use on of the following, from most to least reccomaneded
 
 # Testing
 
-After instalation, you should be able to run `disco --help` (or `./disco --help` for the docker versios
+After installation, you should be able to run `disco --help` (or `./disco --help` for the docker versions
 
-for the docker instalation menthod, you can run `./test.sh` to see an example of input and output.
-
+for the docker installation method, you can run `make test` or `./test.sh` to compare example input and expected output.
 
 
 # Filetree 
-
 
 
 to run dockerised CRISPRdisco or dockerised jupyter notebooks
@@ -198,9 +200,10 @@ to run dockerised CRISPRdisco or dockerised jupyter notebooks
 dirs:
 
     CRISPRdisco/		python library
-    notebooks/			jupyter lab notebooks
-    data/           reference sets
 
+    notebooks/			jupyter lab notebooks
+
+    data/           reference sets
 
 docker and install management files
 
@@ -214,11 +217,6 @@ Jupyter Notebook
 Jupyter Dashboard
     run_dashboard.sh
 
-    kill_dashboard.sh
-    Dockerfile.kernel_gateway
-    Dockerfile.notebook
-    docker-compose.yml
-
     get_URL.sh
 
 build, CI and deploy system
@@ -228,7 +226,6 @@ build, CI and deploy system
 
 
 conda and python install files
-
     setup.cfg
 
     setup.py
@@ -248,7 +245,7 @@ testing
 
 ### requirements:
 
-avoid caring about this by using docker containners (see below)
+avoid caring about this by using docker containers (see above)
 
 Requires:
 python 2.7
@@ -256,12 +253,11 @@ blast+ (tested on 2.6.0+)
 minced (tested on 0.2.0)
 hmmer (tested on 3.1b2)
 
-python library dependences (automatically forfilled if installed with pip or using docker):
+python library dependences (automatically fulfilled if installed with pip or using docker):
 
 pandas
 biopython
 click
-regex
 
 interactive notebook requirements:
 jupyter
@@ -276,7 +272,5 @@ miniconda
 pip
 make
 git
-pytest
-
 
 
