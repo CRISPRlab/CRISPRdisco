@@ -72,6 +72,10 @@ def disco(workingdir, outdir, refset, date, tax, cas, evalue, idcutoff, lengthcu
         else:
             os.mkdir('raw_files/')
         workingdir = 'raw_files/'
+    if os.path.isdir(outdir):
+        pass
+    else:
+        os.mkdir(outdir)
     if refset =='full':
         query_locations = glob.glob('/opt/app/data/fullrefs/*.fasta') 
     elif refset =='typing':
