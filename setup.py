@@ -12,13 +12,10 @@ setup(
         "pytest==3.0.4",
     ],
     install_requires=[
-        'pandas',
-        'numpy',
-        'matplotlib',
-        'seaborn',
-        'biopython',
-        'click',
-        'regex',
+        'pandas==0.22.0',
+        'numpy==1.14.0',
+        'biopython==1.70',
+        'click==6.7'
     ],
     entry_points='''
         [console_scripts]

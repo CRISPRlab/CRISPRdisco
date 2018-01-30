@@ -8,18 +8,8 @@ do
 done
 export PORT
 
-export NAME=$USER\_crisprdisco_jupyter
+export NAME=$USER\_crisprdisco_notebook
 export HOST=$(hostname -f)
 
-docker run \
-    -it \
-    --rm \
-    -v "/mnt":"/mnt" \
-    -v "$PWD":"$PWD" \
-    -w "$PWD" \
-    -p $PORT:$PORT \
-    -e "NB_UID=$UID" \
-    -e "GRANT_SUDO=yes" \
-    --name $NAME \
-    --user root --group-add users crisprlab/crisprdisco_jupyter start-notebook.sh --port $PORT --NotebookApp.base_url=$NAME 2>&1 | sed "s/localhost/${HOST}/g"
+docker run -it --rm -v "$PWD":"$PWD" -w "$PWD" -p $PORT:$PORT -e "NB_UID=$UID" --name $NAME --user root  -e "GRANT_SUDO=yes" crisprlab/crisprdisco_notebook start-notebook.sh --port $PORT --NotebookApp.base_url=$NAME 2>&1 | sed "s/localhost/${HOST}/g"
 

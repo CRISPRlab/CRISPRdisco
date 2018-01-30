@@ -1,7 +1,0 @@
-FROM crisprlab/crisprdisco_notebook
-
-RUN pip install jupyter_kernel_gateway
-
-ENTRYPOINT ["tini", "--", "start.sh"]
-
-CMD ["jupyter", "kernelgateway", "--KernelGatewayApp.ip=0.0.0.0"]
