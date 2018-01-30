@@ -16,8 +16,10 @@ tag:
 	docker tag crisprlab/crisprdisco_notebook:latest crisprlab/crisprdisco_notebook:$(GIT_MASTER_HEAD_SHA)
 
 release:
-	docker push crisprlab/crisprdisco
-	docker push crisprlab/crisprdisco_notebook
+	docker push crisprlab/crisprdisco:latest 
+	docker push crisprlab/crisprdisco:$(GIT_MASTER_HEAD_SHA)
+	docker push crisprlab/crisprdisco_notebook:latest
+	docker push crisprlab/crisprdisco_notebook:$(GIT_MASTER_HEAD_SHA)
 
 TEST=$(shell docker info | grep "Username")
 check_docker_login:
