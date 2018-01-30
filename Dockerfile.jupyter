@@ -1,23 +1,29 @@
 #FROM crisprlab/base:latest
-FROM jupyter/datascience-notebook
+FROM jupyter/datascience-notebook:387f29b6ca83
 
 USER root
 
-RUN conda install -y -c bioconda -c biocore biopython blast minced hmmer
+RUN addgroup nb_group \
+    && usermod -aG nb_group jovyan
+ENV CONDA_DIR /opt/conda
+ENV SHELL /bin/bash
+ENV PATH $CONDA_DIR/bin:$PATH
 
-RUN mkdir /opt/app
+
+ADD fix-permissions /usr/local/bin/fix-permissions
+RUN fix-permissions $CONDA_DIR
 COPY . /opt/app
-RUN chown -R $NB_USER /opt/app
-#RUN fix-permissions /opt/app
+RUN fix-permissions /opt/app
+
+#binary requirements
+RUN apt-get update --fix-missing && apt-get install -y build-essential=11.7
 
 USER $NB_USER
 
-#RUN conda install -y biopython
-#RUN conda create -y -n python2 
+RUN conda install -y -n python2 -c bioconda "python=2.7*" "blast=2.6.0" "minced=0.2.0" "hmmer=3.1b2"
 
+#python requirements handled in setup.py
 #need bash for conda
 SHELL ["/bin/bash", "-c"]
+RUN source activate python2 && cd /opt/app && pip install --disable-pip-version-check -e .
 
-RUN pip install --upgrade pip && cd /opt/app && pip install -e .
-
-#RUN fix-permissions /opt/

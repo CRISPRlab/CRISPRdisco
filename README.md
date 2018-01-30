@@ -39,7 +39,7 @@ Options:
 To run the program in a docker container:
  
  1. Replace `disco` in the examples below with `./disco.sh`
- 1. run from the base directory and only give relative paths, or preface `/home/agbiome/` to the local path (so `./input.csv` becomes `/home/agbiome/input.csv`), as this is where the local directory is mounted inside the container.  
+ 1. run from the base directory and only give relative or full paths, or preface `/home/crisprlab/` to the local path (so `./input.csv` becomes `/home/crisprlab/input.csv`), as this is where the local directory is mounted inside the container.  
 
  
 To run the program, minimum input is:
