@@ -1,14 +1,16 @@
-README file
-
-## Welcome to CRISPRdisco
+# Welcome to CRISPRdisco
 
 CRISPRdisco (CRISPR discovery) will identify CRISPR repeat-spacer arrays and *cas* genes in genome data sets.  The input requirements are a csv file with a column called 'Path' that is the full path to the location of your genomes of interest. If the genomes are located in the same directory as the input csv, the path is not required and you can simply use the basename of the files.
 
 Please see paper: 
 A. Crawley, The AgBiome Team, J. R. Henriksen, and R. Barrangou. 2018. CRISPRdisco: an automated pipeline for the discovery and
-analysis of CRISPR-Cas systems. In press.
+analysis of CRISPR-Cas systems. In press. 
 
 ## Program operation
+
+A command line pipeline tool, a python library, and Jupyter Notebooks for optional visualization and analysis are provided, as well as Docker containers with all dependencies installed.  
+
+
 
 ```
 Usage: disco [OPTIONS] INFILE
@@ -50,8 +52,9 @@ Options:
  
 To run the program in a docker container (recommended):
  
+ 0. See first "Installation" option (below)
  1. Replace `disco` in the examples below with `./disco.sh`
- 1. run from the base directory and give paths below below that location (relative or full).  
+ 2. Run from the base directory and give paths below below that location (relative or full).  
 
 
 To run the program, minimum input is:
@@ -120,25 +123,20 @@ respectively.
 
 
 
-Lastly, a docker container with Jupyter Notebooks and the crisprdsco python library installed are available for optional visualization and analysis.
 
-1) Launch docker container serving out Jupyter Notebooks from the base directory: ./run_jupyter.sh
+# Installation - CLI
 
-2) Go to the displayed webpage and look at file in the `notebooks/` directory
-
-
-# Installation
-
-Use one of the following, from most to least recommended for both the CLI and the Jupyter Notebooks
-
+Use one of the following to install the CLI, from most to least recommended 
 
 ## To use docker containers:
 
-0) On a Ubuntu or debian OS with make, git, and docker installed (either use your package manager and see https://www.docker.com/get-docker):
+0) On a Ubuntu or debian OS with make, git, and docker installed (use your package manager and see https://www.docker.com/get-docker):
 
 1) Get code: `git clone https://github.com/CRISPRlab/CRISPRdisco.git; cd CRISPRdisco`
 
-2) Run CLI: `./disco.sh --help`
+2) Run CLI inside a docker container: `./disco.sh --help`
+
+This has to download a 3.4 GB image, which make take some time depending on your internet connection (2 min in our tests).  
 
 
 ## To make your own docker image if the above code did not run properly:
@@ -147,9 +145,12 @@ Use one of the following, from most to least recommended for both the CLI and th
 
 1) Get code: `git clone https://github.com/CRISPRlab/CRISPRdisco.git; cd CRISPRdisco`
 
-2) Make docker images `make init`
+2) Log in to docker hub with `docker login` and make docker images for the CLI with `make setup`
 
 3) Run CLI: `./disco.sh --help`
+
+This has to download more than ~4 GB worth of binaries, which make take some time depending on your internet connection, as well as install the packages (4 min in our tests).  
+
 
 ## To install by hand:
 
@@ -167,22 +168,52 @@ Use one of the following, from most to least recommended for both the CLI and th
     `wget --quiet https://repo.continuum.io/miniconda/Miniconda2-latest-Linux-x86_64.sh
     /bin/bash Miniconda2-latest-Linux-x86_64.sh -b -f`
 
-    `conda install -y -c bioconda -c biocore python=2.7 blast minced hmmer pip
-    pip install --upgrade pip`
+    `conda install -y -c bioconda -c biocore python=2.7 conda install -y -c bioconda "python=2.7.12" "blast=2.6.0" "minced=0.2.0" "hmmer=3.1b2" "conda=4.1.11" `
 
 3) install CRISPRdisco package with `pip install -e .`
 
 4) You can then run CRISPRdisco with `disco --help`, as well as import it in python with `import CRISPRdisco`
 
 5) (optional) Install jupyter notebook
-
     conda install -y -c anaconda jupyter
     conda install -y nb_conda
 
 
+# Running in a Jupyter Notebook
+
+Use one of the following to launch a jupyter notebook inside a Docker container with the CRISPRdisco python and all dependencies installed, from most to least recommended 
+
+## To use docker containers:
+
+0) On a Ubuntu or debian OS with make, git, and docker installed (use your package manager and see https://www.docker.com/get-docker):
+
+1) Get code: `git clone https://github.com/CRISPRlab/CRISPRdisco.git; cd CRISPRdisco`
+
+2) Run Jupyter inside a docker container: `./run_jupyter.sh`
+
+3) Go to the URL displayed after the container starts and look at the file in the `notebooks/` directory for examples.  
+
+This has to download a 9 GB image, which make take some time depending on your internet connection (8 min in our tests).  
+
+
+## To make your own docker image if the above code did not run properly:
+
+0) On a Ubuntu or debian OS with make, git, and docker installed (use your package manager and see https://www.docker.com/get-docker):
+
+1) Get code: `git clone https://github.com/CRISPRlab/CRISPRdisco.git; cd CRISPRdisco`
+
+2) Log in to docker hub with `docker login` and make docker images for the CLI with `make setup_nb`
+
+3) Run Jupoyter inside a docker container: `./run_jupyter.sh`
+
+4) Go to the URL displayed after the container starts and look at the file in the `notebooks/` directory for examples.  
+
+This has to download a 6.5 GB base Jupyter image and ~4GB additional binary files, which make take some time depending on your internet connection, as well as install the packages (a total of 10 min in our tests).  
+
+
 # Testing
 
-After installation, you should be able to run `disco --help` (or `./disco --help` for the docker versions
+After installation, you should be able to run `disco --help` (or `./disco.sh --help` for the docker versions
 
 for the docker installation method, you can run `make test` or `./test.sh` to compare example input and expected output.
 
@@ -196,81 +227,77 @@ to run dockerised CRISPRdisco or dockerised jupyter notebooks
 
     run_jupyter.sh
 
-
 dirs:
 
     CRISPRdisco/		python library
 
     notebooks/			jupyter lab notebooks
 
-    data/           reference sets
+    data/		reference sets
 
-docker and install management files
+build and deploy system
+
+    Makefile
+
+docker images
 
     Dockerfile
 
-Jupyter Notebook
+    Dockerfile.notebook
 
-    Dockerfile.jupyter
-
-
-Jupyter Dashboard
-    run_dashboard.sh
-
-    get_URL.sh
-
-build, CI and deploy system
-    Makefile
-
-    deploy.sh
-
-
-conda and python install files
-    setup.cfg
-
+python library install files
     setup.py
 
-
-
-testing
+testing files and examples
 
     test/
 
     test.sh
 
 
-
-
-
-
-### requirements:
+# Requirements:
 
 avoid caring about this by using docker containers (see above)
 
-Requires:
-python 2.7
-blast+ (tested on 2.6.0+)
-minced (tested on 0.2.0)
-hmmer (tested on 3.1b2)
+binary requirements:
+
+  python 2.7 (tested on 2.7.12)
+
+  blast+ (tested on 2.6.0+)
+
+  minced (tested on 0.2.0)
+
+  hmmer (tested on 3.1b2)
 
 python library dependences (automatically fulfilled if installed with pip or using docker):
 
-pandas
-biopython
-click
+  pandas (tested on 0.22.0)
 
-interactive notebook requirements:
-jupyter
-pandas
-numpy
-seaborn
-matplotlib
+  biopython (tested on 1.70)
+
+  click (tested on 6.7)
+
+  numpy (tested on 1.14.0)
+
+interactive notebook also needs:
+
+  jupyter (tested on 4.2.1)
+
+  seaborn (tested on 0.7.1)
+
+  matplotlib (tested on 1.5.3)
 
 development and deploy stack:
-docker (tested on 17.06.0-ce, build 02c1d87)
-miniconda
-pip
-make
-git
+
+  docker (tested on 17.05.0-ce, build 89658be)
+
+  miniconda (tested on 4.2.12)
+
+  pip (tested on version 1.9.1)
+
+  make (tested on version 3.81)
+
+  git (tested on version 1.9.1)
+
 
 
