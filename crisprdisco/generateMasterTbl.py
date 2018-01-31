@@ -62,13 +62,13 @@ def generateMASTERtbl(working_outdir, final_outdir, today):
                 test_loop = row[x]
                 #if test_loop > 0:
                 #    print cas_prot, row[x]
-            #print x, test_loop
-            non_VU_count += test_loop
+                #print x, test_loop
+                non_VU_count += test_loop
             if cas_prot != 'RSAs':
                 value_count = row[x]
                 if value_count > 0:
                     systems_list.append(cas_prot)
-            total_count += value_count
+                total_count += value_count
         master_summary_table.loc[index,'Total Cas Prots'] = total_count
         master_summary_table.loc[index,'Total non V-U Prots'] = non_VU_count
         master_summary_table.loc[index, 'Genes present'] = '|'.join(systems_list)
