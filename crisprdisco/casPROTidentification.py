@@ -184,7 +184,7 @@ def get_prots(subject, query, today, sequence_type='.faa', dry_run=False, output
 def casSearch(query_locations, file_locations, today, blastevalue, ID_cutoff, coverage_cutoff, working_outdir=os.getcwd(), final_outdir=os.getcwd(), dry_run_setting=False):
     '''"query_locations" locations is the folder where the reference sets are located. "file_locations" is a list of genomes to search - use the function csvFileInput or *.fasta in working directory.  "working_outdir" can be a folder for temporary files. "final_outdir" is where the final files will be written.'''
     #query_options = glob.glob(query_locations +'*.fasta')
-    print "Searching using " + str(len(query_locations)) + "reference sets"
+    print "Searching using " + str(len(query_locations)) + " reference sets"
     for i, f in enumerate(file_locations):
         #if i > 100:
         #    break

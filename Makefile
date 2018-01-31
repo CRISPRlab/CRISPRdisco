@@ -4,16 +4,16 @@ SHELL:=bash
 GIT_MASTER_HEAD_SHA:=$(shell git rev-parse --short=12 --verify HEAD)
 
 init:
-	docker build --rm -f Dockerfile -t crisprlab/crisprdisco .
+	time docker build --rm -f Dockerfile -t crisprlab/crisprdisco .
 
 init_nb:
-	docker build --rm -f Dockerfile.jupyter -t crisprlab/crisprdisco_notebook .
+	time docker build --rm -f Dockerfile.jupyter -t crisprlab/crisprdisco_notebook .
 
 rebuild:
-	docker build --rm --no-cache -f Dockerfile -t crisprlab/crisprdisco .
+	time docker build --rm --no-cache -f Dockerfile -t crisprlab/crisprdisco .
 
 rebuild_nb:
-	docker build --rm --no-cache -f Dockerfile.jupyter -t crisprlab/crisprdisco_notebook .
+	time docker build --rm --no-cache -f Dockerfile.jupyter -t crisprlab/crisprdisco_notebook .
 
 tag:
 	docker tag crisprlab/crisprdisco:latest crisprlab/crisprdisco:$(GIT_MASTER_HEAD_SHA)
