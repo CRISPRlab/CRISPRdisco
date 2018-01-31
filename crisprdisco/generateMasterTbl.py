@@ -71,7 +71,8 @@ def generateMASTERtbl(working_outdir, final_outdir, today):
             total_count += value_count
         master_summary_table.loc[index,'Total Cas Prots'] = total_count
         master_summary_table.loc[index,'Total non V-U Prots'] = non_VU_count
-        master_summary_table.loc[index, 'Genes present'] = '|'.join(systems_list)
+        #make order of delimiter systems deterministic for testing
+        master_summary_table.loc[index, 'Genes present'] = '|'.join(sorted(systems_list))
     master_summary_table_subset = master_summary_table[['organism','Number of CRISPRs','Total Cas Prots', 'Total non V-U Prots','Genes present']]
     master_summary_table_subset.to_csv(os.path.join(working_outdir,'Master_CRISPR_summary_table_'+today+ '.csv'))
     return master_summary_table_subset
@@ -140,7 +141,7 @@ def findType(cas_prot_string):
             missing_sigprot = ''
         if 'cas1' not in str(cas_prot_string):
             cas1present = 'missing cas1'
-        output = '|'.join(system_type) + ',' + '|'.join(subsystem) + ',' + str(sig_prots) + ',' + str(cas1present) +',' + str(missing_sigprot)
+        output = '|'.join(sorted(system_type)) + ',' + '|'.join(sorted(subsystem)) + ',' + str(sig_prots) + ',' + str(cas1present) +',' + str(missing_sigprot)
         return output
 
 def missingRSA(master_tables):
