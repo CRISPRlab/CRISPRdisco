@@ -6,10 +6,8 @@ setup(
     py_modules=[
     ],
     setup_requires =[
-        "pytest-runner",
     ],
     tests_require=[
-        "pytest==3.0.4",
     ],
     install_requires=[
         'pandas==0.22.0',
