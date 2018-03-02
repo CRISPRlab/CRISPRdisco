@@ -3,8 +3,9 @@
 CRISPRdisco (CRISPR discovery) will identify CRISPR repeat-spacer arrays and *cas* genes in genome data sets.  The input requirements are a csv file with a column called 'Path' that is the full path to the location of your genomes of interest. If the genomes are located in the same directory as the input csv, the path is not required and you can simply use the basename of the files.
 
 Please see paper: 
-A. Crawley, The AgBiome Team, J. R. Henriksen, and R. Barrangou. 2018. CRISPRdisco: an automated pipeline for the discovery and
-analysis of CRISPR-Cas systems. In press. 
+A. Crawley, The AgBiome Team, J. R. Henriksen, and R. Barrangou. 2018. CRISPRdisco: an automated pipeline for the discovery and analysis of CRISPR-Cas systems. in press at The CRISPR Journal. 
+
+The code and docker images reviewed for this paper are tagged "publication".  
 
 ## Program operation
 
