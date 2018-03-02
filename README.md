@@ -138,6 +138,11 @@ Use one of the following to install the CLI, from most to least recommended
 
 This has to download a 3.4 GB image, which make take some time depending on your internet connection (2 min in our tests).  
 
+See Docker Hub for past versions:
+
+  https://hub.docker.com/r/crisprlab/crisprdisco/
+  
+  https://hub.docker.com/r/crisprlab/crisprdisco_notebook/
 
 ## To make your own docker image if the above code did not run properly:
 
