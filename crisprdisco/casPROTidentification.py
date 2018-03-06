@@ -146,7 +146,7 @@ def prot_filter(query, today, ID_cutoff, coverage_cutoff, workingdir=os.getcwd()
         df_summary.to_csv(os.path.join(output_dir, output_summary_str))
         return no_duplicates
 
-def get_prots(subject, query, today, sequence_type='.faa', dry_run=False, output_dir = os.getcwd()):
+def get_prots(subject_locations, query, today, sequence_type='.faa', dry_run=False, output_dir = os.getcwd()):
     '''Query is the full path to the query used in blast and filter. For date_of_analysis, date format is YYYY-MM-DD. "subject_directory" path to directory where genomes are located. Sequence type can be '.faa' for amino acids or '.ffn' of nucleotides. "protfilter_location" is the output_dir from protFilter function. "output_dir" is where the protein sequences should be written. '''
     Cas_dict = {'cas9_':'TypeII', 'cas3_':'TypeI', 'cas3f_':'TypeI-F', 'cas10_':'TypeIII', 'csf4_':'TypeIV', 'cas12a_':'TypeV-A', 'cas12b_':'TypeV-B', 'cas13a_':'TypeVI-A', 'cas13b_':'TypeVI-B', 'cas13c_':'TypeVI-C', '2OG_':'TypeI,TypeIII', 'DEDDh_': 'TypeI', 'DinG_':'TypeIV', 'PD-DExK_':'TypeI,TypeIII', 'PrimPol_':'TypeI,TypeIII', 'WYL_':'TypeI,TypeIII', 'cas10d_':'TypeI-D', 'cas11_':'TypeI', 'cas1_':'universal', 'cas2_':'universal', 'cas4_':'TypeI,TypeII-B,TypeV', 'cas5_':'TypeI', 'cas6_':'TypeI,TypeIII,TypeIV', 'cas7_':'TypeI', 'cas8a_':'TypeI-A', 'cas8b_':'TypeI-B', 'cas8c_':'TypeI-C', 'cas8e_':'TypeI-E', 'cas8f_':'TypeI-F', 'cas8u_':'TypeI-U', 'casR_':'TypeI', 'cmr1g':'TypeIII', 'cmr3g':'TypeIII', 'cmr4g':'TypeIII', 'cmr5g':'TypeIII', 'cmr6g':'TypeIII', 'cmr7_':'TypeIII', 'cmr8g':'TypeIII', 'csa3_':'TypeI-A', 'csa5g':'TypeI-A', 'csb1g':'TypeI-U', 'csb2g':'TypeI-U', 'csb3_':'TypeI-U', 'csc1g':'TypeI-D', 'csc2g':'TypeI-D', ' cse2g':'TypeI-E', 'csf1g':'TypeIV', 'csf2g':'TypeIV', 'csf3g':'TypeIV', 'csf4g':'TypeIV', 'csf5g':'TypeIV', 'csm2g':'TypeIII', 'csm3g':'TypeIII', 'csm4g':'TypeIII', 'csm5g':'TypeIII', 'csm6_':'TypeIII', 'csn2_':'TypeII-A', 'csx10g':'TypeIII', 'csx15_':'TypeIII', 'csx16_':'TypeIII', 'csx18_':'TypeIII', 'csx19_':'TypeIII', 'csx1_':'TypeIII', 'csx20_':'TypeIII', 'csx21_':'TypeIII', 'csx22_':'TypeIII', 'csx23_':'TypeIII', 'csx24_':'TypeIII', 'csx25_':'TypeIII', 'csx26_':'TypeIII', 'csx3_':'TypeIII', 'c2c9_':'TypeV-U', 'c2c8_':'TypeV-U', 'c2c5_':'TypeV-U', 'c2c10_':'TypeV-U', 'c2c4_':'TypeV-U', 'CasX_':'TypeV-E', 'CasY_':'TypeV-D'}
     ref_set=os.path.basename(query)
@@ -158,24 +158,25 @@ def get_prots(subject, query, today, sequence_type='.faa', dry_run=False, output
         print file_input
     prots = pd.read_csv(os.path.join(output_dir, file_input))
     results_list = []
-    for index, row in prots.iterrows():
-        GeneOfInterest = row['subject id']
-        if subject in GeneOfInterest:
-            AIMnumber = GeneOfInterest.split('_')[:-1]
-            proteinID = GeneOfInterest.split('_')[-1]
-            LocationString = os.path.join(subject + '*' + sequence_type)
-            if dry_run==True:
-                print LocationString
-            genome_list = glob.glob(LocationString)
-            genome = genome_list[0]
-            if dry_run==True:
-                print genome_list 
-            handle = open(genome)
-            for record in SeqIO.parse(handle, 'fasta'):
-                if proteinID in record.name:
-                    if dry_run==True:
-                        print True
-                    results_list.append(record)
+    for subject in subject_locations:
+        for index, row in prots.iterrows():
+            GeneOfInterest = row['subject id']
+            if subject in GeneOfInterest:
+                AIMnumber = GeneOfInterest.split('_')[:-1]
+                proteinID = GeneOfInterest.split('_')[-1]
+                LocationString = os.path.join(subject + '*' + sequence_type)
+                if dry_run==True:
+                    print LocationString
+                genome_list = glob.glob(LocationString)
+                genome = genome_list[0]
+                if dry_run==True:
+                    print genome_list 
+                handle = open(genome)
+                for record in SeqIO.parse(handle, 'fasta'):
+                    if proteinID in record.name:
+                        if dry_run==True:
+                            print True
+                        results_list.append(record)
     if dry_run==True:
         print results_list
     if dry_run==False:
@@ -214,8 +215,7 @@ def casSearch(query_locations, file_locations, today, blastevalue, ID_cutoff, co
             if os.path.isfile(t):
                 os.remove(t)
     for query in query_locations:
-        for subject in file_locations:
-            get_prots(subject, query, today, sequence_type='.faa', dry_run=False, output_dir=working_outdir)
+        get_prots(file_locations, query, today, sequence_type='.faa', dry_run=False, output_dir=working_outdir)
 
 def domainSearch(HMM_location, SEQ_location, working_outdir=os.getcwd(),dry_run=False):
     HMMNAME = os.path.basename(HMM_location)
