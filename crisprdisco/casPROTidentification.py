@@ -160,21 +160,22 @@ def get_prots(subject, query, today, sequence_type='.faa', dry_run=False, output
     results_list = []
     for index, row in prots.iterrows():
         GeneOfInterest = row['subject id']
-        AIMnumber = GeneOfInterest.split('_')[:-1]
-        proteinID = GeneOfInterest.split('_')[-1]
-        LocationString = os.path.join(subject + '*' + sequence_type)
-        if dry_run==True:
-            print LocationString
-        genome_list = glob.glob(LocationString)
-        genome = genome_list[0]
-        if dry_run==True:
-            print genome_list 
-        handle = open(genome)
-        for record in SeqIO.parse(handle, 'fasta'):
-            if proteinID in record.name:
-                if dry_run==True:
-                    print True
-                results_list.append(record)
+        if subject in GeneOfInterest:
+            AIMnumber = GeneOfInterest.split('_')[:-1]
+            proteinID = GeneOfInterest.split('_')[-1]
+            LocationString = os.path.join(subject + '*' + sequence_type)
+            if dry_run==True:
+                print LocationString
+            genome_list = glob.glob(LocationString)
+            genome = genome_list[0]
+            if dry_run==True:
+                print genome_list 
+            handle = open(genome)
+            for record in SeqIO.parse(handle, 'fasta'):
+                if proteinID in record.name:
+                    if dry_run==True:
+                        print True
+                    results_list.append(record)
     if dry_run==True:
         print results_list
     if dry_run==False:
