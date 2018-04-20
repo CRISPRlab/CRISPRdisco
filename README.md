@@ -180,18 +180,18 @@ This has to download more than ~4 GB worth of binaries, which make take some tim
 
 Find this bit of code in that script:
 
-`if refset =='full':
-    query_locations = glob.glob('/opt/app/data/fullrefs/*.fasta') 
-elif refset =='typing':
-    query_locations = glob.glob('/opt/app/data/typingrefs/*.fasta')`
+`if refset =='full':`
+`    query_locations = glob.glob('/opt/app/data/fullrefs/*.fasta') `
+`elif refset =='typing':`
+`    query_locations = glob.glob('/opt/app/data/typingrefs/*.fasta')`
 
 
 Change the file path to the location where you cloned the github repo. For example, it should now look like this:
 
-`if refset =='full':
-    query_locations = glob.glob('/home/user/Desktop/CRISPRdisco/data/fullrefs/*.fasta') 
-elif refset =='typing':
-    query_locations = glob.glob('/home/user/Desktop/CRISPRdisco/data/typingrefs/*.fasta')`
+`if refset =='full':`
+`    query_locations = glob.glob('/home/user/Desktop/CRISPRdisco/data/fullrefs/*.fasta') `
+`elif refset =='typing':`
+`    query_locations = glob.glob('/home/user/Desktop/CRISPRdisco/data/typingrefs/*.fasta')`
 
 
 4) install CRISPRdisco package with `pip install -e .`
