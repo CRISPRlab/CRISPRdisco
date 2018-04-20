@@ -176,11 +176,29 @@ This has to download more than ~4 GB worth of binaries, which make take some tim
 
     `conda install -y -c bioconda -c biocore python=2.7 conda install -y -c bioconda "python=2.7.12" "blast=2.6.0" "minced=0.2.0" "hmmer=3.1b2" "conda=4.1.11" `
 
-3) install CRISPRdisco package with `pip install -e .`
+3) You will need to change the main script to recognize the location of reference data sets. The current script is set up to access the reference sets in the Docker container - if you're not using the pipeline in the Docker container, it's a simple fix to point the code to the reference sets. You'll have to edit the script file CRISPRdisco/crisprdisco/cli/script.py. 
 
-4) You can then run CRISPRdisco with `disco --help`, as well as import it in python with `import CRISPRdisco`
+Find this bit of code in that script:
 
-5) (optional) Install jupyter notebook
+`if refset =='full':
+    query_locations = glob.glob('/opt/app/data/fullrefs/*.fasta') 
+elif refset =='typing':
+    query_locations = glob.glob('/opt/app/data/typingrefs/*.fasta')`
+
+
+Change the file path to the location where you cloned the github repo. For example, it should now look like this:
+
+`if refset =='full':
+    query_locations = glob.glob('/home/user/Desktop/CRISPRdisco/data/fullrefs/*.fasta') 
+elif refset =='typing':
+    query_locations = glob.glob('/home/user/Desktop/CRISPRdisco/data/typingrefs/*.fasta')`
+
+
+4) install CRISPRdisco package with `pip install -e .`
+
+5) You can then run CRISPRdisco with `disco --help`, as well as import it in python with `import CRISPRdisco`
+
+6) (optional) Install jupyter notebook
     conda install -y -c anaconda jupyter
     conda install -y nb_conda
 
