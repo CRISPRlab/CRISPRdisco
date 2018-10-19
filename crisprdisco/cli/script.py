@@ -77,9 +77,9 @@ def disco(workingdir, outdir, refset, date, tax, cas, evalue, idcutoff, lengthcu
     else:
         os.mkdir(outdir)
     if refset =='full':
-        query_locations = glob.glob('/opt/app/data/fullrefs/*.fasta') 
+        query_locations = glob.glob('/home/abriner/CRISPRdisco/data/fullrefs/*.fasta') 
     elif refset =='typing':
-        query_locations = glob.glob('/opt/app/data/typingrefs/*.fasta')
+        query_locations = glob.glob('/home/abriner/CRISPRdisco/data/typingrefs/*.fasta')
     if cas =='T':
         print 'Searching for Cas proteins'
         casSearch(query_locations, subject_locations, date, evalue, idcutoff, lengthcutoff, working_outdir=workingdir, final_outdir=outdir)
