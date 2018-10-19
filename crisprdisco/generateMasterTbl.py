@@ -83,12 +83,12 @@ def findType(cas_prot_string):
     elif cas_prot_string =='':
         return ',,,,'
     else:
-        signature_genes = {'cas9':'TypeII','cas3':'TypeI','cas10':'TypeIII','DinG':'TypeIV','csf4':'TypeIV','cas12':'TypeV','cas13':'TypeVI','c2c':'TypeV-U','casX':'TypeV','casY':'TypeV'}
+        signature_genes = {'cas9':'TypeII','cas3':'TypeI','cas10':'TypeIII','DinG':'TypeIV','csf4':'TypeIV','cas12':'TypeV','cas13':'TypeVI','c2c':'TypeV-U','casX':'TypeV','casY':'TypeV','Cas14':'TypeV'}
         TypeI_subtype_genes = {'cas8a':'TypeI-A','cas8b':'TypeI-B','cas8c':'TypeI-C','cas10d':'TypeI-D','cas8e':'TypeI-E','cas8f':'TypeI-F','cas8u':'TypeI-U'}
         TypeII_subtype_genes={'cas4':'TypeII-B','csn2':'TypeII-A'}
         TypeIV_subtype_genes={'TypeIV':'TypeIV'}
         TypeIII_subtype_genes={'csm6':'TypeIII-A','cmr':'TypeIII-B/TypeIII-D','csx10':'TypeIII-C'}
-        TypeV_subtype_genes={'cas12a':'TypeV-A','cas12b':'TypeV-B','cas12c':'TypeV-C','CasY':'TypeV-D','CasX':'TypeV-E'}
+        TypeV_subtype_genes={'cas12a':'TypeV-A','cas12b':'TypeV-B','cas12c':'TypeV-C','CasY':'TypeV-D','CasX':'TypeV-E','Cas14':'TypeV-F'}
         TypeVU_subtype_genes={'csc4':'TypeVU-1','c2c8':'TypeVU-2','c2c10':'TypeVU-3','c2c9':'TypeVU-4','c2c5':'TypeVU-5'}
         TypeVI_subtype_genes={'cas13a':'TypeVI-A','cas13b':'TypeVI-B','cas13c':'TypeVI-C'}
         system_type =list()
@@ -206,7 +206,7 @@ def typeAnalysis(today, final_outdir=os.getcwd(),working_outdir=os.getcwd()):
     for name, group in master_summary_table.groupby(by='system subtype'):
         group_df = pd.DataFrame(data=[[name, len(group)]],columns=['System subtype', 'Counts'])
         subsystemcounts = subsystemcounts.append(group_df)
-    subtype_dict ={'TypeI-A':0,'TypeI-B':0,'TypeI-C':0,'TypeI-D':0,'TypeI-E':0,'TypeI-F':0,'TypeI-U':0,'TypeII-B':0,'TypeII-A':0,'TypeII-C':0,'TypeIII-A':0,'TypeIII-B/TypeIII-D':0,'TypeIII-C':0,'TypeIV':0, 'TypeV-A':0,'TypeV-B':0,'TypeV-C':0,'TypeV-D':0,'TypeV-E':0,'TypeVU-1':0,'TypeVU-2':0,'TypeVU-3':0,'TypeVU-4':0,'TypeVU-5':0,'TypeVI-A':0,'TypeVI-B':0,'TypeVI-C':0} 
+    subtype_dict ={'TypeI-A':0,'TypeI-B':0,'TypeI-C':0,'TypeI-D':0,'TypeI-E':0,'TypeI-F':0,'TypeI-U':0,'TypeII-B':0,'TypeII-A':0,'TypeII-C':0,'TypeIII-A':0,'TypeIII-B/TypeIII-D':0,'TypeIII-C':0,'TypeIV':0, 'TypeV-A':0,'TypeV-B':0,'TypeV-C':0,'TypeV-D':0,'TypeV-E':0,'TypeV-F':0,'TypeVU-1':0,'TypeVU-2':0,'TypeVU-3':0,'TypeVU-4':0,'TypeVU-5':0,'TypeVI-A':0,'TypeVI-B':0,'TypeVI-C':0} 
     for index, row in subsystemcounts.iterrows():
         counts = row['Counts']
         sys_types = row['System subtype']

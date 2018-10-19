@@ -30,7 +30,7 @@ import numpy as np
 def minced(file_path, workingdir=os.getcwd(),dry_run=False):
     file_name = os.path.basename(file_path)
     minced_str = 'minced -gffFull', file_path, os.path.join(workingdir, file_name + '.crispr')
-    #minced_str = ['minced -gffFull', file_path, os.path.join(workingdir, file_name + '.crispr')]   
+    #minced_str = ['minced -gffFull -minNR 2', file_path, os.path.join(workingdir, file_name + '.crispr')]   
     minced_cmd = ' '.join(minced_str)
     if dry_run == True:
         print minced_cmd
