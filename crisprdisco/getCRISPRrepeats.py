@@ -76,6 +76,7 @@ def filterMINCED(loaded_gff, local_location):
                 strand = row['strand']
                 phase = row['phase']
                 GeneOfInterest = row["DR number"]
+		initial_start = row['start']
                 if 'CRISPR' in type_col:
                     initial_start = row['start']
                     final_end = row['end']
