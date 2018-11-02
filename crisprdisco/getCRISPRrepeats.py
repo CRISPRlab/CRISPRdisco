@@ -110,8 +110,11 @@ def filterMINCED(loaded_gff, local_location):
                     consensus = summary_align.gap_consensus()
                     if strand == '-':
                         consensus = consensus.reverse_complement()
-                    summary_line = pd.DataFrame(columns=colheaders, data=[[os.path.basename(local_location), source, type_col, initial_start, final_end, number_reps, strand, name.split('=')[-1], str(consensus)]])
-                    #return 'equal lengths'
+                    try:
+			summary_line = pd.DataFrame(columns=colheaders, data=[[os.path.basename(local_location), source, type_col, initial_start, final_end, number_reps, strand, name.split('=')[-1], str(consensus)]])
+                    except:
+			summary_line = pd.DataFrame(columns=colheaders, data=[[os.path.basename(local_location), source, type_col, 0, 0, 0, 0, name.split('=')[-1], 0]])                    
+			#return 'equal lengths'
                     if 'ID' not in name:
                         repeat_df = repeat_df.append(summary_line)
                     else:
